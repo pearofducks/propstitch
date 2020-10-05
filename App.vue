@@ -1,5 +1,7 @@
 <template>
-  <h1>sup</h1>
+  <div>
+    <h1>sup</h1>
+  </div>
 </template>
 
 <script>

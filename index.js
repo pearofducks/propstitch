@@ -11,36 +11,15 @@ const getTypes = prop => {
   return 'name' in prop ? [prop.name] : ['Unknown']
 }
 const getRequired = prop => {
-  if (typeof type === 'object') return !!prop.required
+  if (prop === null) return false
+  if (typeof prop === 'object') return !!prop.required
   return false
 }
-const result = Object.entries(components).map(([name, component]) => {
-  return name + '::' + Object.entries(component.props).map(([k, v]) => k + ' props:' + getTypes(v).join('|') + ' - required:' + getRequired(v) + ' - default:' + getDefault(v))
-})
+const result = Object.entries(components).reduce((acc, [name, comp]) => {
+  acc[name] = Object.entries(comp.props).reduce((_acc, [k, v]) => {
+    _acc[k] = { types: getTypes(v), required: getRequired(v), default: getDefault(v) }
+    return _acc
+  }, {})
+  return acc
+}, {})
 console.log(result)
-//
-// require('browser-env')()
-// const { h, createApp } = require('vue')
-
-// const Foo = {
-//   props: {
-//     one: String,
-//     two: Boolean
-//   },
-//   render() {
-//     return h('p', 'hello')
-//   }
-// }
-
-// const App = {
-//   name: 'App',
-//   components: { Foo },
-//   render() {
-//     return h('h1', 'hi')
-//   }
-// }
-
-// const app = createApp(App).component('foo', Foo).mount(document.createElement('div'))
-// console.log(app.$)
-
-

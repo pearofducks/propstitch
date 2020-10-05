@@ -20,7 +20,7 @@ var script = {
 };
 
 function ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<h1${serverRenderer.ssrRenderAttrs(_attrs)}>sup</h1>`);
+  _push(`<div${serverRenderer.ssrRenderAttrs(_attrs)}><h1>sup</h1></div>`);
 }
 
 script.ssrRender = ssrRender;
