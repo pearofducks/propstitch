@@ -1,8 +1,11 @@
 ---
 App:
-  $subtitle:
-  $description:
-  $token:
+  $subtitle: an app
+  $description: it's just an app
+  $token: |
+    Does
+    cool
+    stuff
   $slots:
     default: omg a slot
     control: blah blah
