@@ -1,4 +1,5 @@
 import * as testComponents from './dist/components'
+import { writeFileSync } from 'fs'
 import { loadYAML } from './yaml'
 
 const notes = loadYAML()
@@ -35,5 +36,19 @@ export const buildProps = (components) => Object.entries(components).reduce((acc
 }, {})
 
 const result = buildProps(testComponents)
-console.log(notes)
-console.log(result)
+const newline = '\n'
+const print = Object.entries(result).map(([k, v]) => {
+  const result = []
+  result.push(`# ${v.metadata.name}${newline}`)
+  if (v.metadata.subtitle) result.push(`## ${v.metadata.subtitle}${newline}`)
+  if (v.metadata.description) result.push(v.metadata.description + newline)
+  if (v.metadata.token) {
+    result.push('```')
+    result.push(v.metadata.token.trim())
+    result.push('```' + newline)
+  }
+
+  return result.join('\n')
+})
+console.log(print)
+writeFileSync('./foo.md', print.join('\n'))
