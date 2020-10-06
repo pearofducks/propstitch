@@ -19,6 +19,7 @@ export const getRequired = prop => {
 }
 export const getNote = (compName, propName) => notes[compName][propName]
 export const getMetadata = compName => ({
+  name: notes[compName].$name || compName,
   subtitle: notes[compName].$subtitle,
   description: notes[compName].$description,
   token: notes[compName].$token,
@@ -32,7 +33,6 @@ export const buildProps = (components) => Object.entries(components).reduce((acc
   acc[name].metadata = getMetadata(name)
   return acc
 }, {})
-
 
 const result = buildProps(testComponents)
 console.log(notes)
