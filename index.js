@@ -26,27 +26,39 @@ export const getMetadata = compName => ({
   token: notes[compName].$token,
   slots: notes[compName].$slots
 })
+const internalMetadataName = '$metadata'
 export const buildProps = (components) => Object.entries(components).reduce((acc, [name, comp]) => {
   acc[name] = Object.entries(comp.props).reduce((_acc, [k, v]) => {
     _acc[k] = { types: getTypes(v), required: getRequired(v), default: getDefault(v), note: getNote(name, k) }
     return _acc
   }, {})
-  acc[name].metadata = getMetadata(name)
+  acc[name][internalMetadataName] = getMetadata(name)
   return acc
 }, {})
 
 const result = buildProps(testComponents)
+console.log(result)
 const newline = '\n'
-const print = Object.entries(result).map(([k, v]) => {
+const handleUndefined = d => typeof d === 'undefined' ? '' : d
+const typeJoin = ` \\| `
+console.log(typeJoin)
+const markdownLine = ([propName, info]) => `| ${propName} | ${info.types.join(typeJoin)} | ${handleUndefined(info.default)} | ${handleUndefined(info.note)} |`
+const print = Object.values(result).map(v => {
   const result = []
-  result.push(`# ${v.metadata.name}${newline}`)
-  if (v.metadata.subtitle) result.push(`## ${v.metadata.subtitle}${newline}`)
-  if (v.metadata.description) result.push(v.metadata.description + newline)
-  if (v.metadata.token) {
+  const md = v[internalMetadataName]
+  result.push(`# ${md.name}${newline}`)
+  if (md.subtitle) result.push(`## ${md.subtitle}${newline}`)
+  if (md.description) result.push(md.description + newline)
+  if (md.token) {
     result.push('```')
-    result.push(v.metadata.token.trim())
+    result.push(md.token.trim())
     result.push('```' + newline)
   }
+
+  result.push('| Name | Types | Default | Notes |')
+  result.push('|:-----|:------|:--------|:------|')
+  const props = Object.entries(v).filter(([k]) => k !== internalMetadataName).map(markdownLine)
+  result.push(...props)
 
   return result.join('\n')
 })
