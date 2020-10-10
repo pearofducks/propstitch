@@ -1,9 +1,8 @@
 import { writeFile } from 'fs-extra'
-import { roll } from './lib/rollup'
+import { roll, tempFile } from './lib/rollup'
 import { loadNotes, buildProps } from './lib/helpers'
 import { buildMarkdown } from './lib/markdown'
 import minimist from 'minimist'
-import path from 'path'
 
 const argv = minimist(process.argv.slice(2))
 const src = argv._[0]
@@ -12,8 +11,6 @@ if (!src || !dest) {
   console.log('Usage: src dest [--docs]')
   process.exit(1)
 }
-
-export const tempFile = path.join(__dirname, './build.tmp.js')
 
 async function main() {
   loadNotes(argv.notes)
