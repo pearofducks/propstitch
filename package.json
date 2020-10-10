@@ -1,6 +1,6 @@
 {
   "name": "propstitch",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a module to document props in Vue 3 using markdown",
   "main": "dist/index.js",
   "author": "Dave Honneffer <pearofducks@gmail.com>",
