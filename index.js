@@ -1,7 +1,7 @@
 import { writeFile } from 'fs-extra'
-import { roll } from './rollup'
-import { loadNotes, buildProps } from './helpers'
-import { buildMarkdown } from './markdown'
+import { roll } from './lib/rollup'
+import { loadNotes, buildProps } from './lib/helpers'
+import { buildMarkdown } from './lib/markdown'
 import minimist from 'minimist'
 import path from 'path'
 

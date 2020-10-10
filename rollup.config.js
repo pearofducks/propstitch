@@ -1,17 +1,16 @@
-import vue from 'rollup-plugin-vue'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
-import commonjs from '@rollup/plugin-commonjs'
-
 export default {
-  input: 'documentation/components.js',
+  input: 'index.js',
   output: {
     dir: 'dist',
     format: 'cjs'
   },
-  external: ['vue', '@vue/server-renderer'],
-  plugins: [
-    nodeResolve(),
-    commonjs(),
-    vue({ target: 'node' })
+  external: [
+    'rollup',
+    'fs-extra',
+    'js-yaml',
+    'minimist',
+    'rollup-plugin-vue',
+    '@rollup/plugin-node-resolve',
+    '@rollup/plugin-commonjs'
   ]
 }
