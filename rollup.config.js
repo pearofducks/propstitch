@@ -1,3 +1,5 @@
+import pkg from './package.json'
+
 export default {
   input: 'index.js',
   output: {
@@ -5,14 +7,5 @@ export default {
     format: 'cjs',
     banner: '#!/usr/bin/env node',
   },
-  external: [
-    'path',
-    'rollup',
-    'fs-extra',
-    'js-yaml',
-    'minimist',
-    'rollup-plugin-vue',
-    '@rollup/plugin-node-resolve',
-    '@rollup/plugin-commonjs'
-  ]
+  external: ['path', ...Object.keys(pkg.dependencies)]
 }
