@@ -7,8 +7,12 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
-    "version": "npm run build",
-    "postversion": "npm publish && git push --follow-tags"
+    "preversion": "npm run build",
+    "version": "npm publish",
+    "postversion": "git push --follow-tags"
+  },
+  "bin": {
+    "propstitch": "dist/index.js"
   },
   "dependencies": {
     "@rollup/plugin-commonjs": "^15.1.0",
