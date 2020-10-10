@@ -1,6 +1,14 @@
 {
+  "name": "propstitch",
+  "version": "1.0.0",
+  "description": "a module to document props in Vue 3 using markdown",
+  "main": "dist/index.js",
+  "author": "Dave Honneffer <pearofducks@gmail.com>",
+  "license": "MIT",
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "version": "npm run build",
+    "postversion": "npm publish && git push --follow-tags"
   },
   "dependencies": {
     "@rollup/plugin-commonjs": "^15.1.0",
