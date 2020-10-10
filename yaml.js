@@ -1,4 +1,4 @@
 import yaml from 'js-yaml'
-import fs from 'fs'
+import fs from 'fs-extra'
 
-export const loadYAML = () => yaml.safeLoad(fs.readFileSync('./documentation/components.yaml', 'utf-8'))
+export const loadYAML = (location) => yaml.safeLoad(fs.readFileSync(location, 'utf-8'))
