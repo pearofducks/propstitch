@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { writeFile } from 'fs-extra'
 import { roll, tempFile } from './lib/rollup'
 import { loadNotes, buildProps } from './lib/helpers'

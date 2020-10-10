@@ -2,9 +2,11 @@ export default {
   input: 'index.js',
   output: {
     dir: 'dist',
-    format: 'cjs'
+    format: 'cjs',
+    banner: '#!/usr/bin/env node',
   },
   external: [
+    'path',
     'rollup',
     'fs-extra',
     'js-yaml',
